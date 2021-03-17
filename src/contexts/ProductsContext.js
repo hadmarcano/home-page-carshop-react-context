@@ -5,35 +5,37 @@ export const ProductsContext = createContext();
 
 const ProductsContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [doneFetch, setDoneFetch] = useState();
+  const [doneFetch, setDoneFetch] = useState(true);
 
   // InitialState del SHOP-CAR
   const [shopCar, setShopCar] = useState([]); // Items del carrito de compras!!!
 
-  const [badgeState, setBadgeState] = useState([]);
-
-  useEffect(() => getShowProducts(), []);
+  // const [badgeState, setBadgeState] = useState([]);
 
   const getShowProducts = () => {
     fetch(productsGet())
-      .then((res) => res.json())
-      .then((data) => {
-        setDoneFetch(true);
+      .then(res => res.json())
+      .then(data => {
+        setDoneFetch(false);
         setProducts(data);
       })
       .catch((error) => console.log(error));
   };
 
-  const addItemToShopCar = (idItem, itemName) => {
+  useEffect(() => {
+    getShowProducts();
+  }, [])
+
+  const addItemToShopCar = (itemName) => {
     // Actualizamos el estado del carrito de compras!
+    console.log(shopCar)
     setShopCar([
+      ...shopCar,
       {
-        id: idItem,
-        product: itemName,
-        cantidad: 1,
+        id: new Date().getTime(),
+        product: itemName
       },
     ]);
-    console.log(idItem, itemName);
   };
 
   return (

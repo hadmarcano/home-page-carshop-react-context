@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import CollectionItem from "./Collection-item";
 import { ProductsContext } from "../../contexts/ProductsContext";
 import Carousel from "react-elastic-carousel";
-import ProductsContextProvider from "../../contexts/ProductsContext";
 
 const CarouselComponent = () => {
   const { doneFetch, products, addItemToShopCar } = useContext(ProductsContext);
@@ -16,16 +15,21 @@ const CarouselComponent = () => {
       <br />
       <div className="carousel">
         <Carousel itemsToShow={4}>
-          {products.map((item) => (
-            <div key={item.id} className="collection-item-container">
-              <ProductsContextProvider>
-                <CollectionItem
-                  infoItem={item}
-                  addItemToShopCar={addItemToShopCar}
-                />
-              </ProductsContextProvider>
-            </div>
-          ))}
+          {
+            doneFetch ? (
+              <p>Cargando ...</p>
+            ) : (
+              products.map((item) => (
+                <div className="collection-item-container">
+                    <CollectionItem 
+                      infoItem={item}
+                      addItemToShopCar={addItemToShopCar}
+                    />
+                </div>
+              ))
+            )
+          }
+          
         </Carousel>
       </div>
     </>

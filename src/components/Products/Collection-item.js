@@ -3,10 +3,8 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import starFill from "../../assets/img/star.png";
 import starVoid from "../../assets/img/star_alt.png";
-import { ProductsContext } from "../../contexts/ProductsContext";
 
-const CollectionItem = ({ infoItem }) => {
-  const { addItemToShopCar } = useContext(ProductsContext);
+const CollectionItem = ({ infoItem, addItemToShopCar }) => {
   const {
     id,
     product,
@@ -40,7 +38,7 @@ const CollectionItem = ({ infoItem }) => {
           variant="contained"
           color="primary"
           className="button-comprar"
-          onClick={() => addItemToShopCar(id, product)}
+          onClick={() => addItemToShopCar(product)}
         >
           COMPRAR
         </Button>

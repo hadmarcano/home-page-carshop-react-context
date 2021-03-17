@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import Header from "./components/Common/Header";
 import Main from "./components/Main/Main";
@@ -7,20 +7,16 @@ import CarShop from "./components/Products/Car-shop";
 import ProductsContextProvider from "./contexts/ProductsContext";
 
 const App = () => (
-  <Fragment>
+  <ProductsContextProvider>
     <div>
       <Container maxWidth="lg">
-        <ProductsContextProvider>
-          <CarShop />
-        </ProductsContextProvider>
-        <ProductsContextProvider>
-          <Header />
-        </ProductsContextProvider>
+        <CarShop />
+        <Header />
         <Main />
         <Footer />
       </Container>
     </div>
-  </Fragment>
+  </ProductsContextProvider>
 );
 
 export default App;
