@@ -14,8 +14,8 @@ const ProductsContextProvider = ({ children }) => {
 
   const getShowProducts = () => {
     fetch(productsGet())
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setDoneFetch(false);
         setProducts(data);
       })
@@ -24,16 +24,16 @@ const ProductsContextProvider = ({ children }) => {
 
   useEffect(() => {
     getShowProducts();
-  }, [])
+  }, []);
 
   const addItemToShopCar = (itemName) => {
     // Actualizamos el estado del carrito de compras!
-    console.log(shopCar)
+    console.log(shopCar);
     setShopCar([
       ...shopCar,
       {
         id: new Date().getTime(),
-        product: itemName
+        product: itemName,
       },
     ]);
   };
